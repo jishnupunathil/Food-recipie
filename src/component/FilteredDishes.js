@@ -1,33 +1,52 @@
 import React, { useState } from "react";
 
 const FilteredDishes = (props) => {
-console.log("🚀 ~ file: FilteredDishes.js:4 ~ FilteredDishes ~ props:", props)
+  console.log(
+    "🚀 ~ file: FilteredDishes.js:4 ~ FilteredDishes ~ props:",
+    props
+  );
 
-  let [menu,setMenu]=useState(props.allMenu)
+  // eslint-disable-next-line no-unused-vars
+  let [menu, setMenu] = useState(props.allMenu);
 
-  let [filterdDish,setFilteredDish]=useState([])
+  let [filterdDish, setFilteredDish] = useState([]);
 
-  const showFilteredData=(category)=>{
+  let [activeDish, setActive] = useState();
 
+  let [initial, setInitail] = useState(false);
 
-    let filteredDishes=menu.filter((item)=>{
-      return item.strCategory === category
-    })
-    .map((menu)=>{
-      return(
-        <li>
-        <img src={menu.strMealThumb} alt="" className="br-10" />
-        <h5>{menu.strMeal }</h5>
-        </li>
-        )
+  const showFilteredData = (category) => {
+    setActive(category);
+    setInitail(true);
+
+    let filteredDishes = menu
+      .filter((item) => {
+        return item.strCategory === category;
       })
+      .map((menu) => {
+        return (
+          <li>
+            <img src={menu.strMealThumb} alt="" className="br-10" />
+            <h5>{menu.strMeal}</h5>
+          </li>
+        );
+      });
 
-    setFilteredDish(filteredDishes)
-
-  }
+    setFilteredDish(filteredDishes);
+  };
+  console.log(filterdDish.length);
 
   let allCategory = props.allMenuCategory.map((cate) => {
-    return <li onClick={()=>{showFilteredData(cate.strCategory)}}>{cate.strCategory}</li>;
+    return (
+      <li
+        className={cate.strCategory === activeDish ? "active" : ""}
+        onClick={() => {
+          showFilteredData(cate.strCategory);
+        }}
+      >
+        {cate.strCategory}
+      </li>
+    );
   });
   return (
     <div className="filtered-dished">
@@ -40,13 +59,18 @@ console.log("🚀 ~ file: FilteredDishes.js:4 ~ FilteredDishes ~ props:", props)
           </p>
         </div>
         <div className="filterd-dishes">
-          <ul> 
-            {allCategory}
-          </ul>
+          <ul>{allCategory}</ul>
         </div>
         <div className="filtered-dishes-results">
           <ul className="flex flex-wrap gap-30">
-          {filterdDish}
+            {filterdDish.length !== 0 ? (
+              filterdDish
+            ) : (
+              <div className={`alert ${!initial ? "dis" : ""}`}>
+                <h3>Sorry, NO items Found</h3>
+                <h4>Please try another dish</h4>
+              </div>
+            )}
           </ul>
         </div>
       </div>
