@@ -3,6 +3,7 @@ import Hero from "./Hero";
 import SpecialDishes from "./SpecialDishes";
 import FilteredDishes from "./FilteredDishes";
 import Loader from "./Loader";
+import Header from "./Header";
 
 const Menu = () => {
   let [menu, setMenu] = useState([]);
@@ -34,6 +35,7 @@ const Menu = () => {
 
   return (
     <div>
+    <Header/>
       <Hero />
       {!loading ? <SpecialDishes specialMenu={menu} /> :<Loader/>}
       {!loading ? (

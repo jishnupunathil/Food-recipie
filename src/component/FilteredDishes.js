@@ -18,6 +18,7 @@ const FilteredDishes = (props) => {
 
   let [currentPage,setCurrentPage]=useState(1)
 
+  // eslint-disable-next-line no-unused-vars
   let [itemsPerPage,setItemsPerPage]=useState(4)
 
   let indexOflastdish=currentPage * itemsPerPage
