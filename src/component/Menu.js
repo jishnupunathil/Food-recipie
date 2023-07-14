@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Hero from "./Hero";
+import SpecialDishes from "./SpecialDishes";
 
 const Menu = () => {
 
@@ -9,7 +11,7 @@ const Menu = () => {
     },[]);
     
     const getAllMenu = async () => {
-      const API_URL = "https://www.themealdb.com/api/json/v1/1/search.php?f=a";
+      const API_URL = "https://www.themealdb.com/api/json/v1/1/search.php?f=c";
       let response = await fetch(API_URL);
       let data = await response.json();
       console.log("🚀 ~ file: Menu.js:15 ~ getAllMenu ~ data:", data)
@@ -17,17 +19,13 @@ const Menu = () => {
       setMenu(data.meals)
     };
 
-    console.log("the menus are" ,menu);
+  return(
 
-    let menuImages=menu.map((meals)=>{
-      return(
-        <div>
-          <img src={meals.strMealThumb} alt=""/>
-          <h2>{meals.strCategory}</h2>
-        </div>
-      )
-    })
-  return <div>{menuImages}</div>;
+    <div>
+    <Hero/>
+    <SpecialDishes specialMenu={menu}/>
+    </div>
+    )
 };
 
 export default Menu;
