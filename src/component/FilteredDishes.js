@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Pagination from "./Pagination";
 
 const FilteredDishes = (props) => {
   console.log(
@@ -14,6 +15,16 @@ const FilteredDishes = (props) => {
   let [activeDish, setActive] = useState();
 
   let [initial, setInitail] = useState(false);
+
+  let [currentPage,setCurrentPage]=useState(1)
+
+  let [itemsPerPage,setItemsPerPage]=useState(4)
+
+  let indexOflastdish=currentPage * itemsPerPage
+
+  let indexOfFirstDish=indexOflastdish-itemsPerPage
+
+  let slicedDish=filterdDish.slice(indexOfFirstDish,indexOflastdish)
 
   const showFilteredData = (category) => {
     setActive(category);
@@ -64,7 +75,7 @@ const FilteredDishes = (props) => {
         <div className="filtered-dishes-results">
           <ul className="flex flex-wrap gap-30">
             {filterdDish.length !== 0 ? (
-              filterdDish
+              slicedDish
             ) : (
               <div className={`alert ${!initial ? "dis" : ""}`}>
                 <h3>Sorry, NO items Found</h3>
@@ -73,6 +84,12 @@ const FilteredDishes = (props) => {
             )}
           </ul>
         </div>
+
+        <Pagination 
+        filterdDish={filterdDish}
+         itemsPerPage={itemsPerPage}
+         currentPage={currentPage}
+         setCurrentPage={setCurrentPage}/>
       </div>
     </div>
   );
