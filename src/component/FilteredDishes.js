@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
 const FilteredDishes = (props) => {
-  console.log(
-    "🚀 ~ file: FilteredDishes.js:4 ~ FilteredDishes ~ props:",
-    props.allMenuCategory
-  );
+console.log("🚀 ~ file: FilteredDishes.js:4 ~ FilteredDishes ~ props:", props)
+
+  let [menu,setMenu]=useState(props.allMenu)
+
+  let [filterdDish,setFilteredDish]=useState([])
+
+  const showFilteredData=(category)=>{
+
+
+    let filteredDishes=menu.filter((item)=>{
+      return item.strCategory === category
+    })
+    .map((menu)=>{
+      return(
+        <li>
+        <img src={menu.strMealThumb} alt="" className="br-10" />
+        <h5>{menu.strMeal }</h5>
+        </li>
+        )
+      })
+
+    setFilteredDish(filteredDishes)
+
+  }
 
   let allCategory = props.allMenuCategory.map((cate) => {
-    return <li>{cate.strCategory}</li>;
+    return <li onClick={()=>{showFilteredData(cate.strCategory)}}>{cate.strCategory}</li>;
   });
   return (
     <div className="filtered-dished">
@@ -22,6 +42,11 @@ const FilteredDishes = (props) => {
         <div className="filterd-dishes">
           <ul> 
             {allCategory}
+          </ul>
+        </div>
+        <div className="filtered-dishes-results">
+          <ul className="flex flex-wrap gap-30">
+          {filterdDish}
           </ul>
         </div>
       </div>

@@ -6,9 +6,8 @@ import FilteredDishes from "./FilteredDishes";
 const Menu = () => {
 
    let [menu,setMenu]= useState([])
-   
    let [categoryData,setCategory]=useState([])
-   console.log("🚀 ~ file: Menu.js:11 ~ Menu ~ categoryData:", categoryData)
+   let [loading,setLoading]=useState(false)
    
    useEffect(() => {
      getAllMenu();
@@ -16,10 +15,12 @@ const Menu = () => {
     },[]);
     
     const getAllMenu = async () => {
+      setLoading(true)
       const API_URL = "https://www.themealdb.com/api/json/v1/1/search.php?f=c";
       let response = await fetch(API_URL);
       let data = await response.json();
       setMenu(data.meals)
+      setLoading(false)
     };
     
     const getAllCategory = async () => {
@@ -37,8 +38,9 @@ const Menu = () => {
 
     <div>
     <Hero/>
-    <SpecialDishes specialMenu={menu}/>
-    <FilteredDishes allMenuCategory={categoryData}/>
+    {!loading?<SpecialDishes specialMenu={menu}/>:<h3>loading</h3>}
+    {!loading?<FilteredDishes allMenuCategory={categoryData} allMenu={menu}/>:null}
+    
     </div>
     )
 };
