@@ -13,6 +13,9 @@ const SpecialDishes = (props) => {
     setPopData(name)   
     }
 
+    const closePopup = () => {
+      setPopup(false);
+    };
   // eslint-disable-next-line array-callback-return
   let specialMenu = props.specialMenu.map((menu, index) => {
     if (index < maxDish) {
@@ -22,7 +25,7 @@ const SpecialDishes = (props) => {
 
   return (
     <section className="special-dishes">
-    {popup?<PopUp setPopup={setPopup} popData={popData} fullMenu={props.specialMenu}/>:null}
+    {popup?<PopUp setPopup={setPopup} popData={popData} fullMenu={props.specialMenu} closePopup={closePopup}/>:null}
       <div className="container">
         <div className="special-dishes-content text-center">
           <h2>Our Special Dishes</h2>

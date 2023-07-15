@@ -1,11 +1,9 @@
 import React from "react";
 
-const PopUp = ({ setPopup, popData, fullMenu }) => {
+const PopUp = ({ closePopup, popData, fullMenu }) => {
   console.log("🚀 ~ file: PopUp.jsx:4 ~ PopUp ~ specialMenu:", fullMenu);
 
-  const closePopup = () => {
-    setPopup(false);
-  };
+
 
   let dishDetails = fullMenu
     .filter((menu) => {

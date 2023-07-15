@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Pagination from "./Pagination";
 import CardDish from "./CardDish";
+import PopUp from "./PopUp";
 
 const FilteredDishes = (props) => {
   console.log(
@@ -28,6 +29,20 @@ const FilteredDishes = (props) => {
 
   let slicedDish=filterdDish.slice(indexOfFirstDish,indexOflastdish)
 
+  let [popup,setpopup]=useState(false)
+  let [popData,setPopData]=useState('')
+
+  const  showPopUp=(name) => {
+    setpopup(true)
+    setPopData(name)
+    }
+
+    const closePopup = () => {
+      setpopup(false);
+    };
+
+
+
   const showFilteredData = (category) => {
     setActive(category);
     setInitail(true);
@@ -38,13 +53,13 @@ const FilteredDishes = (props) => {
       })
       .map((menu) => {
         return (
-          <CardDish menu={menu}/>
+          <CardDish menu={menu} showPopUp={showPopUp}/>
         );
       });
 
     setFilteredDish(filteredDishes);
   };
-  console.log(filterdDish.length);
+
 
   let allCategory = props.allMenuCategory.map((cate) => {
     return (
@@ -60,6 +75,7 @@ const FilteredDishes = (props) => {
   });
   return (
     <div className="filtered-dished">
+    {popup?<PopUp showPopUp={showPopUp} popData={popData} fullMenu={menu} closePopup={closePopup}/>:null}
       <div className="container">
         <div className="text-center">
           <h2>Choose your Dishes</h2>
