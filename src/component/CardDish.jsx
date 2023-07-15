@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const CardDish = (props) => {
+const CardDish = ({showPopUp,menu}) => {
+
+  
   return (
     <React.Fragment>
     <li>
-    <img src={props.menu.strMealThumb} alt='none' className='br-10'/>
-    <h5>{props.menu.strMeal}</h5>
+    <a href="javaScript:;" onClick={()=>{showPopUp(menu.strMeal)}}>
+    <img src={menu.strMealThumb} alt='none' className='br-10'/>
+    <h5>{menu.strMeal}</h5>
+    </a>
     </li>
+    
     </React.Fragment>
   )
 }
