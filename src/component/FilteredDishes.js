@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "./Pagination";
+import CardDish from "./CardDish";
 
 const FilteredDishes = (props) => {
   console.log(
@@ -37,10 +38,7 @@ const FilteredDishes = (props) => {
       })
       .map((menu) => {
         return (
-          <li>
-            <img src={menu.strMealThumb} alt="" className="br-10" />
-            <h5>{menu.strMeal}</h5>
-          </li>
+          <CardDish menu={menu}/>
         );
       });
 
