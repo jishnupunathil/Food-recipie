@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CardDish from "./CardDish";
 import PopUp from "./PopUp";
+import { AllmenuContext } from "./Menu";
 
-const SpecialDishes = (props) => {
+const SpecialDishes = () => {
+
+  const allMenus=useContext(AllmenuContext)
   const maxDish = 8;
 
   let [popup,setPopup]=useState(false)
@@ -17,7 +20,7 @@ const SpecialDishes = (props) => {
       setPopup(false);
     };
   // eslint-disable-next-line array-callback-return
-  let specialMenu = props.specialMenu.map((menu, index) => {
+  let specialMenu = allMenus.map((menu, index) => {
     if (index < maxDish) {
       return <CardDish menu={menu} showPopUp={showPopUp}/>;
     }
@@ -25,7 +28,7 @@ const SpecialDishes = (props) => {
 
   return (
     <section className="special-dishes">
-    {popup?<PopUp setPopup={setPopup} popData={popData} fullMenu={props.specialMenu} closePopup={closePopup}/>:null}
+    {popup?<PopUp setPopup={setPopup} popData={popData}  closePopup={closePopup}/>:null}
       <div className="container">
         <div className="special-dishes-content text-center">
           <h2>Our Special Dishes</h2>

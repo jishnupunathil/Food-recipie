@@ -5,10 +5,13 @@ import FilteredDishes from "./FilteredDishes";
 import Loader from "./Loader";
 import Header from "./Header";
 
+export const AllmenuContext=React.createContext()
+
 const Menu = () => {
   let [menu, setMenu] = useState([]);
   let [categoryData, setCategory] = useState([]);
   let [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     getAllMenu();
@@ -37,10 +40,12 @@ const Menu = () => {
     <div>
     <Header/>
       <Hero />
-      {!loading ? <SpecialDishes specialMenu={menu} /> :<Loader/>}
+      <AllmenuContext.Provider value={menu}>
+      {!loading ? <SpecialDishes/> :<Loader/>}
       {!loading ? (
-        <FilteredDishes allMenuCategory={categoryData} allMenu={menu} />
-      ) : null}
+        <FilteredDishes allMenuCategory={categoryData}/>
+        ) : null}
+        </AllmenuContext.Provider>
     </div>
   );
 };

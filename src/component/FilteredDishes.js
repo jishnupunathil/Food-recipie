@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Pagination from "./Pagination";
 import CardDish from "./CardDish";
 import PopUp from "./PopUp";
+import { AllmenuContext } from "./Menu";
 
 const FilteredDishes = (props) => {
-  console.log(
-    "🚀 ~ file: FilteredDishes.js:4 ~ FilteredDishes ~ props:",
-    props
-  );
-
+ 
+  const allMenus=useContext(AllmenuContext)
   // eslint-disable-next-line no-unused-vars
-  let [menu, setMenu] = useState(props.allMenu);
+  let [menu, setMenu] = useState(allMenus);
 
   let [filterdDish, setFilteredDish] = useState([]);
 

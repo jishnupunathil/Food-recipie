@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AllmenuContext } from "./Menu";
 
-const PopUp = ({ closePopup, popData, fullMenu }) => {
-  console.log("🚀 ~ file: PopUp.jsx:4 ~ PopUp ~ specialMenu:", fullMenu);
+const PopUp = ({ closePopup, popData}) => {
 
 
+  const allMenu=useContext(AllmenuContext)
 
-  let dishDetails = fullMenu
+
+  let dishDetails = allMenu
     .filter((menu) => {
       return menu.strMeal === popData;
     })
