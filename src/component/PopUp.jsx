@@ -24,7 +24,7 @@ const PopUp = ({ closePopup, popData,addToCartHandler }) => {
             <li>{item.strIngredient4}</li>
           </ul>
 
-          <button onClick={()=>addToCartHandler(item.strMealThumb,item.strMeal)}>Order Now</button>
+          <button onClick={()=>addToCartHandler(item.strMealThumb,item.strMeal)}>Add to Cart</button>
           <h5 className="popup-close" onClick={closePopup}>
             Close
           </h5>

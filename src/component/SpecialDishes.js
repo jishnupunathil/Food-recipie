@@ -10,8 +10,8 @@ const SpecialDishes = () => {
   const allMenus = useContext(AllmenuContext);
   let [popup, setPopup] = useState(false);
   let [popData, setPopData] = useState("");
-  let [cartImage,setCartImage]=useState("")
-  let [cartTitle,setCartTitle]=useState("")
+  let [cartData,setCartData]=useState([])
+
 
 
   const showPopUp = (name) => {
@@ -30,8 +30,12 @@ const SpecialDishes = () => {
   });
 
   const addToCartHandler=(cartImage,cartTitle) => {
-    setCartImage(cartImage)
-    setCartTitle(cartTitle)
+    setCartData([
+      ...cartData,
+      {
+      "img":cartImage,
+      "title":cartTitle
+    }])
     
   }
 
@@ -41,7 +45,7 @@ const SpecialDishes = () => {
         <PopUp setPopup={setPopup} popData={popData} closePopup={closePopup} addToCartHandler={addToCartHandler} />
       ) : null}
       <div className="container">
-      <AddToKart cartImage={cartImage} cartTitle={cartTitle}/>
+      <AddToKart cartData={cartData}/>
         <div className="special-dishes-content text-center">
           <h2>Our Special Dishes</h2>
           <p>
