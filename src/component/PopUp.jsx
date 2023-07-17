@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
-import { AllmenuContext } from "./Menu";
+import { AllmenuContext } from "./allMenuContext";
 
-const PopUp = ({ closePopup, popData}) => {
-
-
-  const allMenu=useContext(AllmenuContext)
-
+const PopUp = ({ closePopup, popData }) => {
+  const allMenu = useContext(AllmenuContext);
 
   let dishDetails = allMenu
     .filter((menu) => {

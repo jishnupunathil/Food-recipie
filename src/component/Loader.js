@@ -21,7 +21,7 @@ const Loader = () => {
         </path>
         <circle cx="50" cy="50" r="16" fill="#424242"></circle>
       </svg>
-      <h5 style={{color:'white'}}>Loading</h5>
+      <h5 style={{ color: "white" }}>Loading</h5>
     </div>
   );
 };

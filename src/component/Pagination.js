@@ -11,14 +11,16 @@ const Pagination = (props) => {
     numberOfPages.push(i);
 
   let pages = numberOfPages.map((pageNumber) => {
-    return <li id={pageNumber} onClick={showNextDishes}>{pageNumber}</li>;
+    return (
+      <li id={pageNumber} onClick={showNextDishes}>
+        {pageNumber}
+      </li>
+    );
   });
 
-  function showNextDishes(event){
-
-    let currentPage=event.target.id
-    props.setCurrentPage(currentPage)
-
+  function showNextDishes(event) {
+    let currentPage = event.target.id;
+    props.setCurrentPage(currentPage);
   }
 
   return (

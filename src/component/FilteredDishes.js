@@ -2,11 +2,10 @@ import React, { useContext, useState } from "react";
 import Pagination from "./Pagination";
 import CardDish from "./CardDish";
 import PopUp from "./PopUp";
-import { AllmenuContext } from "./Menu";
+import { AllmenuContext } from "./allMenuContext";
 
 const FilteredDishes = (props) => {
- 
-  const allMenus=useContext(AllmenuContext)
+  const allMenus = useContext(AllmenuContext);
   // eslint-disable-next-line no-unused-vars
   let [menu, setMenu] = useState(allMenus);
 
@@ -16,30 +15,28 @@ const FilteredDishes = (props) => {
 
   let [initial, setInitail] = useState(false);
 
-  let [currentPage,setCurrentPage]=useState(1)
+  let [currentPage, setCurrentPage] = useState(1);
 
   // eslint-disable-next-line no-unused-vars
-  let [itemsPerPage,setItemsPerPage]=useState(4)
+  let [itemsPerPage, setItemsPerPage] = useState(4);
 
-  let indexOflastdish=currentPage * itemsPerPage
+  let indexOflastdish = currentPage * itemsPerPage;
 
-  let indexOfFirstDish=indexOflastdish-itemsPerPage
+  let indexOfFirstDish = indexOflastdish - itemsPerPage;
 
-  let slicedDish=filterdDish.slice(indexOfFirstDish,indexOflastdish)
+  let slicedDish = filterdDish.slice(indexOfFirstDish, indexOflastdish);
 
-  let [popup,setpopup]=useState(false)
-  let [popData,setPopData]=useState('')
+  let [popup, setpopup] = useState(false);
+  let [popData, setPopData] = useState("");
 
-  const  showPopUp=(name) => {
-    setpopup(true)
-    setPopData(name)
-    }
+  const showPopUp = (name) => {
+    setpopup(true);
+    setPopData(name);
+  };
 
-    const closePopup = () => {
-      setpopup(false);
-    };
-
-
+  const closePopup = () => {
+    setpopup(false);
+  };
 
   const showFilteredData = (category) => {
     setActive(category);
@@ -50,14 +47,11 @@ const FilteredDishes = (props) => {
         return item.strCategory === category;
       })
       .map((menu) => {
-        return (
-          <CardDish menu={menu} showPopUp={showPopUp}/>
-        );
+        return <CardDish menu={menu} showPopUp={showPopUp} />;
       });
 
     setFilteredDish(filteredDishes);
   };
-
 
   let allCategory = props.allMenuCategory.map((cate) => {
     return (
@@ -73,7 +67,14 @@ const FilteredDishes = (props) => {
   });
   return (
     <div className="filtered-dished">
-    {popup?<PopUp showPopUp={showPopUp} popData={popData} fullMenu={menu} closePopup={closePopup}/>:null}
+      {popup ? (
+        <PopUp
+          showPopUp={showPopUp}
+          popData={popData}
+          fullMenu={menu}
+          closePopup={closePopup}
+        />
+      ) : null}
       <div className="container">
         <div className="text-center">
           <h2>Choose your Dishes</h2>
@@ -98,11 +99,12 @@ const FilteredDishes = (props) => {
           </ul>
         </div>
 
-        <Pagination 
-        filterdDish={filterdDish}
-         itemsPerPage={itemsPerPage}
-         currentPage={currentPage}
-         setCurrentPage={setCurrentPage}/>
+        <Pagination
+          filterdDish={filterdDish}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );
