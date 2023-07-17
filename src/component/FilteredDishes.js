@@ -3,6 +3,7 @@ import Pagination from "./Pagination";
 import CardDish from "./CardDish";
 import PopUp from "./PopUp";
 import { AllmenuContext } from "./allMenuContext";
+import AddToKart from "./addToKart";
 
 const FilteredDishes = (props) => {
   const allMenus = useContext(AllmenuContext);
@@ -17,6 +18,7 @@ const FilteredDishes = (props) => {
   let [popup, setpopup] = useState(false);
   let [popData, setPopData] = useState("");
   let [categoryData, setCategory] = useState([]);
+  let [cartData,setCartData]=useState([])
 
   let indexOflastdish = currentPage * itemsPerPage;
 
@@ -29,6 +31,15 @@ const FilteredDishes = (props) => {
   useEffect(() => {
     getAllCategory();
   }, []);
+
+  const addToCartHandler=(cartImage,cartTitle) => {
+    setCartData([
+      ...cartData,
+      {
+      "img":cartImage,
+      "title":cartTitle
+    }])
+  }
 
   const getAllCategory = async () => {
     const API_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -75,6 +86,8 @@ const FilteredDishes = (props) => {
       </li>
     );
   });
+
+  
   return (
     <div className="filtered-dished">
       {popup ? (
@@ -83,9 +96,11 @@ const FilteredDishes = (props) => {
           popData={popData}
           fullMenu={menu}
           closePopup={closePopup}
+          addToCartHandler={addToCartHandler}
         />
       ) : null}
       <div className="container">
+      <AddToKart cartData={cartData}/>
         <div className="text-center">
           <h2>Choose your Dishes</h2>
           <p>
