@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AllmenuContext } from "./allMenuContext";
 
-const PopUp = ({ closePopup, popData }) => {
+const PopUp = ({ closePopup, popData,addToCartHandler }) => {
   const allMenu = useContext(AllmenuContext);
 
   let dishDetails = allMenu
@@ -23,6 +23,11 @@ const PopUp = ({ closePopup, popData }) => {
             <li>{item.strIngredient3}</li>
             <li>{item.strIngredient4}</li>
           </ul>
+
+          <button onClick={()=>addToCartHandler(item.strMealThumb,item.strMeal)}>Order Now</button>
+          <h5 className="popup-close" onClick={closePopup}>
+            Close
+          </h5>
         </div>
       );
     });
@@ -31,10 +36,7 @@ const PopUp = ({ closePopup, popData }) => {
     <div className="popup">
       <div className="popup-content">
         {dishDetails}
-        <button>Order Now</button>
-        <h5 className="popup-close" onClick={closePopup}>
-          Close
-        </h5>
+        
       </div>
     </div>
   );

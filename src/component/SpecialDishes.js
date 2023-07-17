@@ -2,13 +2,17 @@ import React, { useContext, useState } from "react";
 import CardDish from "./CardDish";
 import PopUp from "./PopUp";
 import { AllmenuContext } from "./allMenuContext";
+import AddToKart from "./addToKart";
 
 const SpecialDishes = () => {
-  const allMenus = useContext(AllmenuContext);
   const maxDish = 8;
-
+  
+  const allMenus = useContext(AllmenuContext);
   let [popup, setPopup] = useState(false);
   let [popData, setPopData] = useState("");
+  let [cartImage,setCartImage]=useState("")
+  let [cartTitle,setCartTitle]=useState("")
+
 
   const showPopUp = (name) => {
     setPopup(true);
@@ -25,12 +29,19 @@ const SpecialDishes = () => {
     }
   });
 
+  const addToCartHandler=(cartImage,cartTitle) => {
+    setCartImage(cartImage)
+    setCartTitle(cartTitle)
+    
+  }
+
   return (
     <section className="special-dishes">
       {popup ? (
-        <PopUp setPopup={setPopup} popData={popData} closePopup={closePopup} />
+        <PopUp setPopup={setPopup} popData={popData} closePopup={closePopup} addToCartHandler={addToCartHandler} />
       ) : null}
       <div className="container">
+      <AddToKart cartImage={cartImage} cartTitle={cartTitle}/>
         <div className="special-dishes-content text-center">
           <h2>Our Special Dishes</h2>
           <p>

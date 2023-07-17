@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import Pagination from "./Pagination";
 import CardDish from "./CardDish";
 import PopUp from "./PopUp";
@@ -8,17 +8,15 @@ const FilteredDishes = (props) => {
   const allMenus = useContext(AllmenuContext);
   // eslint-disable-next-line no-unused-vars
   let [menu, setMenu] = useState(allMenus);
-
   let [filterdDish, setFilteredDish] = useState([]);
-
   let [activeDish, setActive] = useState();
-
   let [initial, setInitail] = useState(false);
-
   let [currentPage, setCurrentPage] = useState(1);
-
   // eslint-disable-next-line no-unused-vars
   let [itemsPerPage, setItemsPerPage] = useState(4);
+  let [popup, setpopup] = useState(false);
+  let [popData, setPopData] = useState("");
+  let [categoryData, setCategory] = useState([]);
 
   let indexOflastdish = currentPage * itemsPerPage;
 
@@ -26,8 +24,20 @@ const FilteredDishes = (props) => {
 
   let slicedDish = filterdDish.slice(indexOfFirstDish, indexOflastdish);
 
-  let [popup, setpopup] = useState(false);
-  let [popData, setPopData] = useState("");
+  
+
+  useEffect(() => {
+    getAllCategory();
+  }, []);
+
+  const getAllCategory = async () => {
+    const API_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
+    let response = await fetch(API_URL);
+
+    let categoryData = await response.json();
+
+    setCategory(categoryData.categories);
+  };
 
   const showPopUp = (name) => {
     setpopup(true);
@@ -53,7 +63,7 @@ const FilteredDishes = (props) => {
     setFilteredDish(filteredDishes);
   };
 
-  let allCategory = props.allMenuCategory.map((cate) => {
+  let allCategory = categoryData.map((cate) => {
     return (
       <li
         className={cate.strCategory === activeDish ? "active" : ""}
